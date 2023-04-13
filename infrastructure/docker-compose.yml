@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  categlog_db:
+    image: mongo
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./catelog:/data/db
