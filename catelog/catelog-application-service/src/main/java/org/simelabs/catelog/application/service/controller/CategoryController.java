@@ -1,9 +1,7 @@
 package org.simelabs.catelog.application.service.controller;
 
-import org.simelabs.catelog.application.service.dto.CreateBrandCommand;
 import org.simelabs.catelog.application.service.dto.CreateCategoryCommand;
-import org.simelabs.catelog.application.service.exception.BrandException;
-import org.simelabs.catelog.application.service.models.Brand;
+import org.simelabs.catelog.application.service.exception.BrandNotFoundException;
 import org.simelabs.catelog.application.service.models.Category;
 import org.simelabs.catelog.application.service.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,7 @@ public class CategoryController {
     @PostMapping("/create")
     public ResponseEntity<?> createCategory(@RequestBody @Valid CreateCategoryCommand createCategoryCommand){
         if (categoryRepository.findByName(createCategoryCommand.getName()).isPresent()) {
-            throw new BrandException("category already exist with this name ", HttpStatus.BAD_REQUEST);
+            throw new BrandNotFoundException("category already exist with this name ", HttpStatus.BAD_REQUEST);
         }
         Category category = categoryRepository.save(
                 Category.builder()
@@ -39,7 +37,7 @@ public class CategoryController {
     
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable String id){
-        Category brand = categoryRepository.findById(id).orElseThrow(() -> new BrandException("Not found category with this id " + id, HttpStatus.NOT_FOUND));
+        Category brand = categoryRepository.findById(id).orElseThrow(() -> new BrandNotFoundException("Not found category with this id " + id, HttpStatus.NOT_FOUND));
         return ResponseEntity.ok(brand);
     }
 

@@ -109,6 +109,7 @@ class CategoryControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(om.writeValueAsString(minLengthRequestBody))
                 )
+                .andExpect(jsonPath("$.message").isNotEmpty())
                 .andExpect(status().is(400));
 
     }
