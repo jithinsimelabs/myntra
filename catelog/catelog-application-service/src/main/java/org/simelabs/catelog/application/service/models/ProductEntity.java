@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Column;
@@ -33,6 +34,8 @@ public class ProductEntity {
     @LastModifiedDate
     private Instant updatedAt;
 
+    @Version
+    private Integer version;
 
 
 }

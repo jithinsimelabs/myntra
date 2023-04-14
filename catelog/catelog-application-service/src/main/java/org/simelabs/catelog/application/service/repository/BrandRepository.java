@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface BrandRepository extends MongoRepository<Brand, String> {
     Optional<Brand> findByName(String name);
+
 }
